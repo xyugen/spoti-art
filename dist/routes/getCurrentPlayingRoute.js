@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
-const router = express.router();
-app.get('/current-playing', async (req, res) => {
+const router = express.Router();
+router.get('/current-playing', async (req, res) => {
     try {
         const token = req.query.token;
         if (!token) {
@@ -20,3 +20,4 @@ app.get('/current-playing', async (req, res) => {
         return res.status(500).json({ error: 'An error occured while fetching current music.' });
     }
 });
+export default router;
