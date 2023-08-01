@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { renderCurrentlyPlaying } from '../../client/renderCurrentlyPlaying.js';
-import { fetchCurrentMusicData } from '../../fetchers/fetchCurrentMusicData.js';
+import { fetchCurrentMusicData } from '../../Middlewares/fetchCurrentMusicData.js';
 
 const router = express.Router();
 

@@ -51,3 +51,14 @@ export async function checkUsernameExists(username: string) {
         return false;
     }
 }
+
+export const updateUserAccessToken = async (username: string, token: string) => {
+    try {
+        const db: mongodb.Db = client.db(MONGODB_DB);
+        const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
+
+        const result = await collection.updateOne({ username: username }, { access_token: token });
+    } catch (error) {
+        console.log("Error updating user access token: ", error);
+    }
+} 

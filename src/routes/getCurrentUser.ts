@@ -1,4 +1,4 @@
-import { fetchUserData } from '../fetchers/fetchUserInfo.js'; // Adjust the path to your file
+import { fetchUserData } from '../Middlewares/fetchUserInfo.js'; // Adjust the path to your file
 import express, { Request, Response } from 'express';
 
 const router = express.Router();

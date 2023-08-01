@@ -36,3 +36,13 @@ export async function checkUsernameExists(username) {
         return false;
     }
 }
+export const updateUserAccessToken = async (username, token) => {
+    try {
+        const db = client.db(MONGODB_DB);
+        const collection = db.collection("user_info");
+        const result = await collection.updateOne({ username: username }, { access_token: token });
+    }
+    catch (error) {
+        console.log("Error updating user access token: ", error);
+    }
+};
