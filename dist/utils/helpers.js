@@ -6,7 +6,7 @@ export function generateRandomString(length) {
     }
     return result;
 }
-function isAccessTokenExpired(createdAt, expiresInSeconds) {
+export function isAccessTokenExpired(createdAt, expiresInSeconds) {
     const expiryTimestamp = new Date(createdAt.getTime() + expiresInSeconds * 1000);
     const currentTimestamp = new Date();
     return currentTimestamp >= expiryTimestamp;

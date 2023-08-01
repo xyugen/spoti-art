@@ -7,7 +7,7 @@ export const fetchCurrentMusicData = async (req: Request, res: Response, next: N
     try {
         const key = req.query.key as string;
         if (!key) {
-            return res.status(400).json({ error: 'API token is missing.' });
+            return res.status(400).json({ error: 'API key is missing..' });
         }
 
         const user = await getUserFromCollection(key);
