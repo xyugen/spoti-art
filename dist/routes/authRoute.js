@@ -16,3 +16,4 @@ router.get('/auth', (req, res) => {
             state: state
         }));
 });
+export default router;

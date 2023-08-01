@@ -1,5 +1,4 @@
 import express, { Express, Request, Response } from 'express';
-import axios from 'axios';
 import { generateRandomString } from 'src/utils/helpers';
 import { stringify } from 'querystring';
 
@@ -21,3 +20,5 @@ router.get('/auth', (req: Request, res: Response) => {
         state: state
     }));
 });
+
+export default router;
