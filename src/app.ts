@@ -30,4 +30,7 @@ app.use(getCurrentlyPlayingRoute);
 app.use(authRoute);
 app.use(callbackRoute);
 
+// Clients
+app.use(renderCurrentlyPlaying);
+
 export default app;

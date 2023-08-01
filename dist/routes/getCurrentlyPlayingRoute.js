@@ -18,7 +18,7 @@ router.get('/currently-playing', async (req, res) => {
     }
     catch (error) {
         console.error("Error fetching current music: ", error);
-        return res.status(500).json({ error: 'An error occured while fetching current music.' });
+        return res.status(500).json({ error: 'An error occured while fetching current music.', errors: error });
     }
 });
 export default router;
