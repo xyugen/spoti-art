@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import axios from 'axios';
 import { stringify } from 'querystring';
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SPOTIFY_ACCOUNTS_API_BASE_URL } from '../utils/constants.js';
-import { addUserToCollection } from '../database/user.js'
+import { addUserToCollection, checkUsernameExists } from '../database/user.js'
 import { fetchUserData } from '../fetchers/fetchUserInfo.js';
 
 const router = express.Router();
@@ -44,7 +44,9 @@ router.get('/callback', async (req: Request, res: Response) => {
             const userData = await fetchUserData(access_token);
             
             const { id } = userData;
-            addUserToCollection({ username: id, access_token, refresh_token });
+            if (!await checkUsernameExists(id)) {
+                addUserToCollection({ username: id, access_token, refresh_token });
+            }
             res.redirect(`/embed/currently-playing?key=${id}`)
         } catch (error) {
             console.error('Error exchanging code for access token:', error);

@@ -34,3 +34,16 @@ export async function getUserFromCollection(username: string) {
         console.log("Error getting user from MongoDB: ", error);
     }
 }
+
+export async function checkUsernameExists(username: string) {
+    try {
+        const db: mongodb.Db = client.db(MONGODB_DB);
+        const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
+
+        const user = await collection.findOne({ username: username });
+        return user !== null; // Return true if user is found, false otherwise
+    } catch (error) {
+        console.log("Error checking if username exists in MongoDB: ", error);
+        return false;
+    }
+}
