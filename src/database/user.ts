@@ -6,6 +6,8 @@ export interface UserInfo {
     username: string,
     access_token: string,
     refresh_token: string,
+    expires_in: number,
+    created_at?: Date,
 }
 
 export async function addUserToCollection(userInfo: UserInfo) {
@@ -14,6 +16,8 @@ export async function addUserToCollection(userInfo: UserInfo) {
 
         const db: mongodb.Db = client.db(MONGODB_DB);
         const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
+
+        userInfo.created_at = new Date();
 
         const result = await collection.insertOne(userInfo as UserInfo);
     } catch (error) {

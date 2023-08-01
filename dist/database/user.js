@@ -5,6 +5,7 @@ export async function addUserToCollection(userInfo) {
         await client.connect();
         const db = client.db(MONGODB_DB);
         const collection = db.collection("user_info");
+        userInfo.created_at = new Date();
         const result = await collection.insertOne(userInfo);
     }
     catch (error) {

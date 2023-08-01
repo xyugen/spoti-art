@@ -39,13 +39,13 @@ router.get('/callback', async (req: Request, res: Response) => {
             const data = response.data;
             // Here you can handle the access token and other data in the response
             //res.json(data);
-            const { access_token, refresh_token } = data;
+            const { access_token, refresh_token, expires_in } = data;
 
             const userData = await fetchUserData(access_token);
             
             const { id } = userData;
             if (!await checkUsernameExists(id)) {
-                addUserToCollection({ username: id, access_token, refresh_token });
+                addUserToCollection({ username: id, access_token, refresh_token , expires_in});
             }
             res.redirect(`/embed/currently-playing?key=${id}`)
         } catch (error) {

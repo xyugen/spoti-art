@@ -34,11 +34,11 @@ router.get('/callback', async (req, res) => {
                 }
             });
             const data = response.data;
-            const { access_token, refresh_token } = data;
+            const { access_token, refresh_token, expires_in } = data;
             const userData = await fetchUserData(access_token);
             const { id } = userData;
             if (!await checkUsernameExists(id)) {
-                addUserToCollection({ username: id, access_token, refresh_token });
+                addUserToCollection({ username: id, access_token, refresh_token, expires_in });
             }
             res.redirect(`/embed/currently-playing?key=${id}`);
         }
