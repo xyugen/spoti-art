@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from 'express';
 import { generateRandomString } from '../utils/helpers.js';
 import { stringify } from 'querystring';
 import { CLIENT_ID, REDIRECT_URI, SPOTIFY_API_SCOPES } from '../utils/constants.js';
+import { checkUsernameExists } from '../database/user.js';
+import { fetchUserData } from '../middlewares/fetchUserInfo.js';
 
 const router = express.Router();
 

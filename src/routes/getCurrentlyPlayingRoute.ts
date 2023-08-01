@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import axios from 'axios';
 import { SPOTIFY_API_BASE_URL } from '../utils/constants.js';
+import { isLoggedInMiddleware } from '../middlewares/isLoggedInMiddleware.js';
 
 const router = express.Router();
 

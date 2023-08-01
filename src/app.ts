@@ -15,6 +15,7 @@ import currentlyPlaying from './routes/embed/currentlyPlaying.js';
 
 // Middlewares
 import { tokenRefreshMiddleware } from './middlewares/tokenRefreshMiddleware.js';
+import { isLoggedInMiddleware } from './middlewares/isLoggedInMiddleware.js';
 
 dotenv.config();
 const app = express();
@@ -25,15 +26,20 @@ const __dirname = dirname(__filename);
 // Serve static files from the 'public' folder
 app.use('/', express.static(path.join(__dirname, '../public')));
 
+// Middleware (Priority)
+
+// Auth route
+app.use(authRoute);
+app.use(callbackRoute);
+
 // Middleware
 app.use(express.json());
+//app.use(isLoggedInMiddleware);
 app.use(tokenRefreshMiddleware);
 
 // Routes
 app.use(getTokenRoute);
 app.use(getCurrentlyPlayingRoute);
-app.use(authRoute);
-app.use(callbackRoute);
 app.use(getCurrentUser);
 
 // Clients

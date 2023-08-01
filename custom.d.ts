@@ -4,5 +4,6 @@ declare module 'express' {
     interface Request {
         musicData?: any;
         userData?: any;
+        accessToken?: any;
     }
 }
