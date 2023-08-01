@@ -5,6 +5,7 @@ export const renderCurrentlyPlaying = (musicStats) => {
     const fgColor = "#D9D9D9";
     const fontFamily = "'Montserrat', 'Poppins', sans-serif";
     const imgBgColor = "#3F2E3E";
+    const isPlaying = musicStats.is_playing ? "Playing" : "Paused";
     const computeTitleSize = () => {
         function clamp(value, min, max) {
             return Math.min(Math.max(value, min), max);
@@ -74,7 +75,7 @@ export const renderCurrentlyPlaying = (musicStats) => {
         <div class="card">
             <div class="card__cover">
                 <img src="${musicStats.item.album.images[1].url}" id="cover__image" />
-                <p id="cover__status">PLAYING</p>
+                <p id="cover__status">${isPlaying.toUpperCase()}</p>
             </div>
 
             <div class="card__control">

@@ -47,6 +47,7 @@ export const renderCurrentlyPlaying = (musicStats: MusicStat) => {
     const fontFamily = "'Montserrat', 'Poppins', sans-serif";
 
     const imgBgColor = "#3F2E3E";
+    const isPlaying = musicStats.is_playing? "Playing" : "Paused";
 
 
     const computeTitleSize = () => {
@@ -124,7 +125,7 @@ export const renderCurrentlyPlaying = (musicStats: MusicStat) => {
         <div class="card">
             <div class="card__cover">
                 <img src="${musicStats.item.album.images[1].url}" id="cover__image" />
-                <p id="cover__status">PLAYING</p>
+                <p id="cover__status">${isPlaying.toUpperCase()}</p>
             </div>
 
             <div class="card__control">
