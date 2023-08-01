@@ -7,3 +7,6 @@ const PORT = `:${process.env.PORT}` || null;
 export const REDIRECT_URI = `${process.env.URL}${PORT}/callback`;
 export const CLIENT_ID = process.env.CLIENT_ID;
 export const CLIENT_SECRET = process.env.CLIENT_SECRET;
+export const MONGODB_UNAME = process.env.MONGODB_USERNAME;
+export const MONGODB_PASS = process.env.MONGODB_PASSWORD;
+export const MONGODB_DB = process.env.MONGODB_DBNAME;
