@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import axios from 'axios';
 import { stringify } from 'querystring';
+import { SPOTIFY_ACCOUNTS_API_BASE_URL } from 'src/utils/constants';
 
 const router = express.Router();
 
@@ -24,8 +25,8 @@ router.post('/get-token', async (req: Request, res: Response) => {
             client_secret: clientSecret,
         })
 
-        const response = await axios.post('https://accounts.spotify.com/api/token', data, {
-            url: 'https://accounts.spotify.com/api/token',
+        const response = await axios.post(`${SPOTIFY_ACCOUNTS_API_BASE_URL}api/token`, data, {
+            url: `${SPOTIFY_ACCOUNTS_API_BASE_URL}/api/token`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         });
 

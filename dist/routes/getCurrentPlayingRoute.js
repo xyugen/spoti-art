@@ -1,5 +1,6 @@
 import express from 'express';
 import axios from 'axios';
+import { SPOTIFY_API_BASE_URL } from 'src/utils/constants';
 const router = express.Router();
 router.get('/current-playing', async (req, res) => {
     try {
@@ -7,7 +8,7 @@ router.get('/current-playing', async (req, res) => {
         if (!token) {
             return res.status(400).json({ error: 'API token is missing.' });
         }
-        const response = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
+        const response = await axios.get(`${SPOTIFY_API_BASE_URL}/me/player/currently-playing`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },

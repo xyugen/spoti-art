@@ -1,18 +1,17 @@
 import express from 'express';
 import { generateRandomString } from 'src/utils/helpers';
 import { stringify } from 'querystring';
+import { CLIENT_ID, REDIRECT_URI, SPOTIFY_API_SCOPES } from 'src/utils/constants';
 const router = express.Router();
-const clientId = process.env.CLIENT_ID;
-const redirectUri = `${process.env.URL}:${process.env.PORT}/callback`;
 router.get('/auth', (req, res) => {
     const state = generateRandomString(16);
-    const scope = 'user-read-private user-read-email user-read-currently-playing';
+    const scope = SPOTIFY_API_SCOPES;
     res.redirect('https://accounts.spotify.com/authorize?' +
         stringify({
             response_type: 'code',
-            client_id: clientId,
+            client_id: CLIENT_ID,
             scope: scope,
-            redirect_uri: redirectUri,
+            redirect_uri: REDIRECT_URI,
             state: state
         }));
 });

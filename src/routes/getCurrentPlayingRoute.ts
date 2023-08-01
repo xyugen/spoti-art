@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import axios from 'axios';
+import { SPOTIFY_API_BASE_URL } from 'src/utils/constants';
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get('/current-playing', async (req: Request, res: Response) => {
         }
 
         // Fetch the current playing music data from Spotify API
-        const response = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
+        const response = await axios.get(`${SPOTIFY_API_BASE_URL}/me/player/currently-playing`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },

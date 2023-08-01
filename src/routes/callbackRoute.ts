@@ -1,17 +1,14 @@
 import express, { Express, Request, Response } from 'express';
 import { stringify } from 'querystring';
+import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SPOTIFY_ACCOUNTS_API_BASE_URL } from 'src/utils/constants';
 
 const router = express.Router();
-
-const redirectUri = `${process.env.URL}:${process.env.PORT}/callback`;
-const clientId = `${process.env.CLIENT_ID}`;
-const clientSecret = `${process.env.CLIENT_SECRET}`;
 
 router.get('/callback', (req: Request, res: Response) => {
     const code = req.query.code || null;
     const state = req.query.state || null;
 
-    const authHeader = 'Basic ' + Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+    const authHeader = 'Basic ' + Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64');
 
     if (state === null) {
         res.redirect('/#' +
@@ -20,10 +17,10 @@ router.get('/callback', (req: Request, res: Response) => {
             }));
     } else {
         const authOptions = {
-            url: 'https://accounts.spotify.com/api/token',
+            url: `${SPOTIFY_ACCOUNTS_API_BASE_URL}/api/token`,
             form: {
                 code: code,
-                redirect_uri: redirectUri,
+                redirect_uri: REDIRECT_URI,
                 grant_type: 'authorization_code'
             },
             headers: {
