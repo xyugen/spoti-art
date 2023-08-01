@@ -1,6 +1,6 @@
 import express from 'express';
-import getTokenRoute from './routes/getTokenRoute';
-import getCurrentlyPlayingRoute from './routes/getCurrentPlayingRoute';
+import getTokenRoute from './routes/getTokenRoute.js';
+import getCurrentlyPlayingRoute from './routes/getCurrentPlayingRoute.js';
 
 const app = express();
 
