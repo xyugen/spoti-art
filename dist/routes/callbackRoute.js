@@ -2,6 +2,8 @@ import express from 'express';
 import axios from 'axios';
 import { stringify } from 'querystring';
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SPOTIFY_ACCOUNTS_API_BASE_URL } from '../utils/constants.js';
+import { addUserToCollection } from '../database/user.js';
+import { fetchUserData } from '../fetchers/fetchUserInfo.js';
 const router = express.Router();
 router.get('/callback', async (req, res) => {
     const code = req.query.code;
@@ -31,15 +33,13 @@ router.get('/callback', async (req, res) => {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-            const urlSafeBase64Encode = (data) => {
-                return Buffer.from(data, 'utf-8').toString('base64')
-                    .replace(/\+/g, '-')
-                    .replace(/\//g, '_')
-                    .replace(/=/g, '');
-            };
             const data = response.data;
-            const { access_token } = data;
-            res.redirect(`/embed/currently-playing?token=${access_token}`);
+            const { access_token, refresh_token } = data;
+            fetchUserData(req, res, async () => {
+                const { id } = req.userData;
+                addUserToCollection({ username: id, access_token, refresh_token });
+                res.redirect(`/embed/currently-playing?token=${access_token}`);
+            });
         }
         catch (error) {
             console.error('Error exchanging code for access token:', error);

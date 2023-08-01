@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import axios from 'axios';
 import { stringify } from 'querystring';
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SPOTIFY_ACCOUNTS_API_BASE_URL } from '../utils/constants.js';
+import { addUserToCollection } from '../database/user.js'
+import { fetchUserData } from '../fetchers/fetchUserInfo.js';
 
 const router = express.Router();
 
@@ -34,19 +36,16 @@ router.get('/callback', async (req: Request, res: Response) => {
                 }
             });
 
-            const urlSafeBase64Encode = (data: string): string => {
-                return Buffer.from(data, 'utf-8').toString('base64')
-                    .replace(/\+/g, '-')
-                    .replace(/\//g, '_')
-                    .replace(/=/g, '');
-            };
-
             const data = response.data;
             // Here you can handle the access token and other data in the response
             //res.json(data);
-            const { access_token } = data;
+            const { access_token, refresh_token } = data;
 
-            res.redirect(`/embed/currently-playing?token=${access_token}`)
+            fetchUserData(req, res,async () => {
+                const { id } = req.userData;
+                addUserToCollection({ username: id, access_token, refresh_token });
+                res.redirect(`/embed/currently-playing?token=${access_token}`)
+            })
         } catch (error) {
             console.error('Error exchanging code for access token:', error);
             return res.status(500).json({ error: 'An error occurred while exchanging code for access token' });

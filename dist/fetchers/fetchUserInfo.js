@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SPOTIFY_API_BASE_URL } from 'src/utils/constants';
+import { SPOTIFY_API_BASE_URL } from '../utils/constants.js';
 export const fetchUserData = async (req, res, next) => {
     try {
         const token = req.query.token;

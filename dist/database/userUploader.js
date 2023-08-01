@@ -1,6 +1,6 @@
 import { MONGODB_DB } from 'src/utils/constants';
 import { client } from './mongodbConnection';
-async function addUserToCollection(username, token, refresh_token) {
+export async function addUserToCollection(username, token, refresh_token) {
     try {
         await client.connect();
         const db = client.db(MONGODB_DB);

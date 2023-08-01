@@ -8,6 +8,7 @@ import getTokenRoute from './routes/getTokenRoute.js';
 import getCurrentlyPlayingRoute from './routes/getCurrentlyPlayingRoute.js';
 import authRoute from './routes/authRoute.js';
 import callbackRoute from './routes/callbackRoute.js';
+import getCurrentUser from './routes/getCurrentUser.js'
 
 // Clients
 import currentlyPlaying from './routes/embed/currentlyPlaying.js';
@@ -29,6 +30,7 @@ app.use(getTokenRoute);
 app.use(getCurrentlyPlayingRoute);
 app.use(authRoute);
 app.use(callbackRoute);
+app.use(getCurrentUser);
 
 // Clients
 app.use(currentlyPlaying);

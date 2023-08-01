@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
-import { SPOTIFY_API_BASE_URL } from 'src/utils/constants';
+import { SPOTIFY_API_BASE_URL } from '../utils/constants.js';
 
 export const fetchUserData =async (req: Request, res: Response, next: NextFunction) => {
     try {
