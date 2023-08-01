@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "ES2022",
+        "target": "ESNext",
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "rootDir": "src",
+        "outDir": "dist",
+        "strict": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"],
+}
