@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import axios from 'axios';
-import { SPOTIFY_API_BASE_URL } from 'src/utils/constants';
+import { SPOTIFY_API_BASE_URL } from '../utils/constants.js';
 
 export const fetchCurrentMusicData =async (req: Request, res: Response, next: NextFunction) => {
     try {

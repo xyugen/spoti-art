@@ -1,0 +1,60 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .card {
+        width: 550px;
+        height: 300px;
+        background-color: #331D2C;
+        display: flex;
+        border-radius: 5px;
+        color: #D9D9D9;
+        font-family: 'Montserrat', 'Poppins', sans-serif;
+    }
+    .card__cover {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    #cover__image {
+        width: 207px;
+        height: 207px;
+        border-radius: 5px;
+        background-color: #3F2E3E;
+    }
+    #cover__status {
+        font-weight: 500;
+        font-size: 18px;
+        margin-top: 15px;
+    }
+    .card__control {
+        width: 100%;
+        word-wrap: break-word;
+    }
+    #control__title {
+        margin-top: 47px;
+        font-size: 78px;
+        font-weight: 600;
+    }
+    #control__artist {
+        font-size: 20px;
+        font-weight: 600;
+        margin-left: 8px;
+    }
+</style>
+
+<div class="card">
+    <div class="card__cover">
+        <img src="https://i.scdn.co/image/ab67616d00001e0272c9f7a7c75eba39726106a6" id="cover__image" />
+        <p id="cover__status">PLAYING</p>
+    </div>
+
+    <div class="card__control">
+        <p id="control__title">RUN</p>
+        <p id="control__artist">JOJI</p>
+    </div>
+</div>
