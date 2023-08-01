@@ -5,6 +5,8 @@ import getCurrentlyPlayingRoute from './routes/getCurrentPlayingRoute.js';
 import authRoute from './routes/authRoute.js';
 import callbackRoute from './routes/callbackRoute.js';
 
+import testRoute from './routes/testRoute.js';
+
 dotenv.config();
 const app = express();
 
@@ -15,6 +17,7 @@ app.use(express.json());
 app.use(getTokenRoute);
 app.use(getCurrentlyPlayingRoute);
 app.use(authRoute);
-app
+app.use(callbackRoute);
+app.use(testRoute);
 
 export default app;
