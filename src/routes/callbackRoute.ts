@@ -37,10 +37,10 @@ router.get('/callback', async (req: Request, res: Response) => {
             const data = response.data;
             // Here you can handle the access token and other data in the response
 
-            res.json(data);
+            return res.json(data);
         } catch (error) {
             console.error('Error exchanging code for access token:', error);
-            res.status(500).json({ error: 'An error occurred while exchanging code for access token' });
+            return res.status(500).json({ error: 'An error occurred while exchanging code for access token' });
         }
     }
 });

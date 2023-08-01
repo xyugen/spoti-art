@@ -32,11 +32,11 @@ router.get('/callback', async (req, res) => {
                 }
             });
             const data = response.data;
-            res.json(data);
+            return res.json(data);
         }
         catch (error) {
             console.error('Error exchanging code for access token:', error);
-            res.status(500).json({ error: 'An error occurred while exchanging code for access token' });
+            return res.status(500).json({ error: 'An error occurred while exchanging code for access token' });
         }
     }
 });
