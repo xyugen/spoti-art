@@ -1,7 +1,7 @@
 {
   "name": "spotiart",
   "version": "1.0.0",
-  "description": "Personalized Spotify Now Playing visuals.",
+  "description": "Personalized Spotify embedded music visuals.",
   "main": "server.js",
   "type": "module",
   "scripts": {
