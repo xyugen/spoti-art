@@ -3,7 +3,7 @@ import axios from 'axios';
 import { stringify } from 'querystring';
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SPOTIFY_ACCOUNTS_API_BASE_URL } from '../utils/constants.js';
 import { addUserToCollection, checkUsernameExists } from '../database/user.js';
-import { fetchUserData } from '../Middlewares/fetchUserInfo.js';
+import { fetchUserData } from '../middlewares/fetchUserInfo.js';
 const router = express.Router();
 router.get('/callback', async (req, res) => {
     const code = req.query.code;

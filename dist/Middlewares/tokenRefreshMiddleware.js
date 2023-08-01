@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { SPOTIFY_ACCOUNTS_API_BASE_URL, CLIENT_ID, CLIENT_SECRET } from '../utils/constants.js';
 import { getUserFromCollection, updateUserAccessToken } from '../database/user.js';
-import { isAccessTokenExpired } from 'src/utils/helpers.js';
+import { isAccessTokenExpired } from '../utils/helpers.js';
 import { stringify } from 'querystring';
 export const tokenRefreshMiddleware = async (req, res, next) => {
     try {

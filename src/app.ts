@@ -13,6 +13,9 @@ import getCurrentUser from './routes/getCurrentUser.js'
 // Clients
 import currentlyPlaying from './routes/embed/currentlyPlaying.js';
 
+// Middlewares
+import { tokenRefreshMiddleware } from './middlewares/tokenRefreshMiddleware.js';
+
 dotenv.config();
 const app = express();
 
@@ -24,6 +27,7 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 
 // Middleware
 app.use(express.json());
+app.use(tokenRefreshMiddleware);
 
 // Routes
 app.use(getTokenRoute);
