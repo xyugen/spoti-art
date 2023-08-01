@@ -52,12 +52,14 @@ export async function checkUsernameExists(username: string) {
     }
 }
 
-export const updateUserAccessToken = async (username: string, token: string) => {
+export const updateUserAccessToken = async (username: string, token: string, createdAt?: Date) => {
     try {
         const db: mongodb.Db = client.db(MONGODB_DB);
         const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
 
-        const result = await collection.updateOne({ username: username }, { access_token: token });
+        if (!createdAt) createdAt = new Date();
+
+        const result = await collection.updateOne({ username: username }, { access_token: token, created_at: createdAt });
     } catch (error) {
         console.log("Error updating user access token: ", error);
     }
