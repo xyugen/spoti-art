@@ -1,6 +1,6 @@
 import express from 'express';
 import { stringify } from 'querystring';
-import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SPOTIFY_ACCOUNTS_API_BASE_URL } from 'src/utils/constants';
+import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SPOTIFY_ACCOUNTS_API_BASE_URL } from '../utils/constants.js';
 const router = express.Router();
 router.get('/callback', (req, res) => {
     const code = req.query.code || null;

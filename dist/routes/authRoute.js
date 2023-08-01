@@ -1,7 +1,7 @@
 import express from 'express';
-import { generateRandomString } from 'src/utils/helpers';
+import { generateRandomString } from '../utils/helpers.js';
 import { stringify } from 'querystring';
-import { CLIENT_ID, REDIRECT_URI, SPOTIFY_API_SCOPES } from 'src/utils/constants';
+import { CLIENT_ID, REDIRECT_URI, SPOTIFY_API_SCOPES } from '../utils/constants.js';
 const router = express.Router();
 router.get('/auth', (req, res) => {
     const state = generateRandomString(16);

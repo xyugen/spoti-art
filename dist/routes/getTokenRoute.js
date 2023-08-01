@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import { stringify } from 'querystring';
-import { SPOTIFY_ACCOUNTS_API_BASE_URL } from 'src/utils/constants';
+import { SPOTIFY_ACCOUNTS_API_BASE_URL } from '../utils/constants.js';
 const router = express.Router();
 router.post('/get-token', async (req, res) => {
     try {
