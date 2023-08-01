@@ -6,11 +6,15 @@ export const renderCurrentlyPlaying = (musicStats) => {
     const fontFamily = "'Montserrat', 'Poppins', sans-serif";
     const imgBgColor = "#3F2E3E";
     const computeTitleSize = () => {
+        function clamp(value, min, max) {
+            return Math.min(Math.max(value, min), max);
+        }
         const controlTitle = document.getElementById("control__title");
         if (controlTitle) {
             const titleText = controlTitle.textContent || "";
             const titleLength = titleText.length;
-            controlTitle.style.fontSize = `${78 - (titleLength * 1.5)}px`;
+            const newFontSize = 78 - (titleLength * 1.75);
+            controlTitle.style.fontSize = `${clamp(newFontSize, 30, 78)}px`;
         }
     };
     const setCSS = `

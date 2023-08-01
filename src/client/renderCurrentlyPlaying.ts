@@ -48,14 +48,20 @@ export const renderCurrentlyPlaying = (musicStats: MusicStat) => {
 
     const imgBgColor = "#3F2E3E";
 
+
     const computeTitleSize = () => {
+        function clamp(value: number, min: number, max: number): number {
+            return Math.min(Math.max(value, min), max);
+        }
+
         const controlTitle = document.getElementById("control__title");
 
         if (controlTitle) {
             const titleText = controlTitle.textContent || "";
             const titleLength = titleText.length;
             
-            controlTitle.style.fontSize = `${78 - (titleLength * 1.5)}px`;
+            const newFontSize = 78 - (titleLength * 1.75)
+            controlTitle.style.fontSize = `${clamp(newFontSize, 30, 78)}px`;
         }
     };
 
@@ -109,7 +115,7 @@ export const renderCurrentlyPlaying = (musicStats: MusicStat) => {
             }
         </style>
     `
-    
+
     return (
         `
         <html lang="en">
