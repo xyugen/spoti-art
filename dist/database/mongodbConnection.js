@@ -8,3 +8,6 @@ export const client = new MongoClient(uri, {
         deprecationErrors: true,
     }
 });
+client.connect().catch((err) => {
+    console.error(`Error connecting to MongoDB: ${err}`);
+});

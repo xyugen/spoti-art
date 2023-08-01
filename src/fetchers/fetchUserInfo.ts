@@ -1,26 +1,23 @@
 import axios from 'axios';
-import { NextFunction, Request, Response } from 'express';
-import { SPOTIFY_API_BASE_URL } from '../utils/constants.js';
 
-export const fetchUserData =async (req: Request, res: Response, next: NextFunction) => {
+interface UserData {
+    id: string;
+    display_name: string;
+    email: string;
+    // Add other properties you want to fetch
+}
+
+export const fetchUserData = async (accessToken: string): Promise<UserData> => {
     try {
-        const token = req.query.token as string;
-        if (token === null) {
-            return res.status(400).json({ error: 'API token is missing.' });
-        }
-
-        const response = await axios.get(`${SPOTIFY_API_BASE_URL}/v1/me`, {
+        const response = await axios.get('https://api.spotify.com/v1/me', {
             headers: {
-                'Authorization': `Bearer ${token}`,
-            }
+                'Authorization': `Bearer ${accessToken}`,
+            },
         });
 
-        const userData = response.data;
-
-        req.userData = userData;
-
-        next();
+        return response.data as UserData;
     } catch (error) {
-        return res.status(500).json({ error: 'An error occured while fetching current user.' });
+        // Handle any error that may occur during the API request
+        throw new Error('An error occurred while fetching current user data from Spotify.');
     }
-}
+};

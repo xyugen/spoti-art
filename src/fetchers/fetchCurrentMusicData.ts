@@ -1,17 +1,25 @@
 import { Request, Response, NextFunction } from 'express';
 import axios from 'axios';
 import { SPOTIFY_API_BASE_URL } from '../utils/constants.js';
+import { UserInfo, getUserFromCollection } from '../database/user.js';
 
 export const fetchCurrentMusicData = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const token = req.query.token as string;
-        if (!token) {
+        const key = req.query.key as string;
+        if (!key) {
             return res.status(400).json({ error: 'API token is missing.' });
         }
 
+        const user = await getUserFromCollection(key);
+        if (!user || !user.access_token) {
+            // Handle the case where the user is not authenticated or the access_token is missing.
+            console.log(await getUserFromCollection(key));
+            return res.status(401).json({ error: 'User not authenticated or access token missing.' });
+        }
+        
         const response = await axios.get(`${SPOTIFY_API_BASE_URL}/me/player/currently-playing`, {
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${user.access_token}`,
             },
         });
 

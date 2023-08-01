@@ -1,7 +1,8 @@
 import { MONGODB_DB } from '../utils/constants.js';
 import { client } from './mongodbConnection.js';
+import mongodb from 'mongodb';
 
-interface UserInfo {
+export interface UserInfo {
     username: string,
     access_token: string,
     refresh_token: string,
@@ -11,31 +12,25 @@ export async function addUserToCollection(userInfo: UserInfo) {
     try {
         await client.connect();
 
-        const db = client.db(MONGODB_DB);
-        const collection = db.collection("user_info");
+        const db: mongodb.Db = client.db(MONGODB_DB);
+        const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
 
         const result = await collection.insertOne(userInfo as UserInfo);
-        console.log("User added to the collection: ", result.insertedId);
     } catch (error) {
         console.log("Error uploading user to MongoDB: ", error);
-    } finally {
-        await client.close();
     }
 }
 
 export async function getUserFromCollection(username: string) {
     try {
-        client.connect();
+        await client.connect();
 
-        const db = client.db(MONGODB_DB);
-        const collection = db.collection("user_info");
+        const db: mongodb.Db = client.db(MONGODB_DB);
+        const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
 
-        const user = collection.findOne({ username: username });
-
+        const user = await collection.findOne({ username: username });
         return user;
     } catch (error) {
         console.log("Error getting user from MongoDB: ", error);
-    } finally {
-        await client.close();
     }
 }

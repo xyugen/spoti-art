@@ -35,15 +35,14 @@ router.get('/callback', async (req, res) => {
             });
             const data = response.data;
             const { access_token, refresh_token } = data;
-            fetchUserData(req, res, async () => {
-                const { id } = req.userData;
-                addUserToCollection({ username: id, access_token, refresh_token });
-                res.redirect(`/embed/currently-playing?token=${access_token}`);
-            });
+            const userData = await fetchUserData(access_token);
+            const { id } = userData;
+            addUserToCollection({ username: id, access_token, refresh_token });
+            res.redirect(`/embed/currently-playing?key=${id}`);
         }
         catch (error) {
             console.error('Error exchanging code for access token:', error);
-            return res.status(500).json({ error: 'An error occurred while exchanging code for access token' });
+            return res.status(500).json({ error: 'An error occurred while exchanging code for access token', errors: error });
         }
     }
 });
