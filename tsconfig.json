@@ -9,6 +9,7 @@
         "outDir": "dist",
         "baseUrl": "./",
         "strict": true,
+        "types": ["node", "express", "./custom.d.ts"],
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true
     },

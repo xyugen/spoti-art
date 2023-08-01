@@ -10,7 +10,7 @@ import authRoute from './routes/authRoute.js';
 import callbackRoute from './routes/callbackRoute.js';
 
 // Clients
-import renderCurrentlyPlaying from './routes/embed/currently-playing.js';
+import currentlyPlaying from './routes/embed/currentlyPlaying.js';
 
 dotenv.config();
 const app = express();
@@ -31,6 +31,6 @@ app.use(authRoute);
 app.use(callbackRoute);
 
 // Clients
-app.use(renderCurrentlyPlaying);
+app.use(currentlyPlaying);
 
 export default app;
