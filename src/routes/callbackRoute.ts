@@ -34,10 +34,19 @@ router.get('/callback', async (req: Request, res: Response) => {
                 }
             });
 
+            const urlSafeBase64Encode = (data: string): string => {
+                return Buffer.from(data, 'utf-8').toString('base64')
+                    .replace(/\+/g, '-')
+                    .replace(/\//g, '_')
+                    .replace(/=/g, '');
+            };
+
             const data = response.data;
             // Here you can handle the access token and other data in the response
+            //res.json(data);
+            const { access_token } = data;
 
-            return res.json(data);
+            res.redirect(`/embed/currently-playing?token=${access_token}`)
         } catch (error) {
             console.error('Error exchanging code for access token:', error);
             return res.status(500).json({ error: 'An error occurred while exchanging code for access token' });

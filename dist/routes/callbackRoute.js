@@ -31,8 +31,15 @@ router.get('/callback', async (req, res) => {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
+            const urlSafeBase64Encode = (data) => {
+                return Buffer.from(data, 'utf-8').toString('base64')
+                    .replace(/\+/g, '-')
+                    .replace(/\//g, '_')
+                    .replace(/=/g, '');
+            };
             const data = response.data;
-            return res.json(data);
+            const { access_token } = data;
+            res.redirect(`/embed/currently-playing?token=${access_token}`);
         }
         catch (error) {
             console.error('Error exchanging code for access token:', error);
