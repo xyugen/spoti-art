@@ -4,7 +4,7 @@ import { SPOTIFY_API_BASE_URL } from '../utils/constants.js';
 
 const router = express.Router();
 
-router.get('/current-playing', async (req: Request, res: Response) => {
+router.get('/currently-playing', async (req: Request, res: Response) => {
     try {
         const token = req.query.token as string;
         if (!token) {
