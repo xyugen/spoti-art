@@ -84,50 +84,57 @@ class Card {
         </style>
     `*/
 
+
     renderCard() {
-        return `
-        <html lang="en">
-            <head>
-                <style>
-                    * {
-                        margin: 0;
-                        padding: 0;
-                        box-sizing: border-box;
-                    }
-                    .card {
-                        width: ${this.width}px;
-                        height: ${this.height}px;
-                        background-color: ${this.colors.bgColor};
-                        display: flex;
-                        border-radius: 5px;
-                        color: ${this.colors.fgColor};
-                        font-family: ${this.fontFamily};
-                    }
-                    ${this.css}
-                    @media print {
-                        /* Define print styles here */
-                        body *:not(#my-content) {
-                            display: none;
+        const htmlElement = `
+            <html lang="en">
+                <head>
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
                         }
-                    }
-                </style>
-            </head>
-            <body>
-                ${this.html}
-                <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-                <script>
-                    document.addEventListener("DOMContentLoaded", ${convertToImage});
-                </script>
-            </body>
-        </html>
-        `
+                        .card {
+                            width: ${this.width}px;
+                            height: ${this.height}px;
+                            background-color: ${this.colors.bgColor};
+                            display: flex;
+                            border-radius: 5px;
+                            color: ${this.colors.fgColor};
+                            font-family: ${this.fontFamily};
+                        }
+                        ${this.css}
+                        @media print {
+                            /* Define print styles here */
+                            body *:not(#my-content) {
+                                display: none;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${this.html}
+                    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", ${convertToImage});
+                    </script>
+                </body>
+            </html>
+        `;
+
+        return htmlElement;
     }
 }
 
 const convertToImage = () => {
     const cardHtml = document.getElementById('card') as HTMLDivElement;
-    html2canvas(cardHtml, { allowTaint: true }).then(canvas => {
-        document.body.appendChild(canvas);
+    html2canvas(cardHtml, { allowTaint: true, useCORS: true }).then(canvas => {
+        const imageUrl = canvas.toDataURL('image/png')
+        const img = document.createElement('img') as HTMLImageElement;
+        img.src = imageUrl;
+        document.body.appendChild(img);
+        
         cardHtml.style.display = 'none';
     })
 }
