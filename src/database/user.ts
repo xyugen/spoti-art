@@ -46,7 +46,7 @@ export interface UserInfo {
 }
 
 /**
- * Adds a new user to the "user_info" collection in the MongoDB database.
+ * Adds a new user to the "user_auth" collection in the MongoDB database.
  *
  * @param {UserInfo} userInfo - The user information to be added to the collection.
  * @returns {Promise<void>} A Promise that resolves when the operation is complete.
@@ -54,7 +54,7 @@ export interface UserInfo {
 export const addUserToCollection = async (userInfo: UserInfo): Promise<void> => {
     try {
         const db: mongodb.Db = getMongoClient().db(MONGODB_DB);
-        const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
+        const collection: mongodb.Collection<UserInfo> = db.collection("user_auth");
 
         userInfo.created_at = new Date();
 
@@ -65,7 +65,7 @@ export const addUserToCollection = async (userInfo: UserInfo): Promise<void> => 
 }
 
 /**
- * Retrieves user information from the "user_info" collection based on the username.
+ * Retrieves user information from the "user_auth" collection based on the username.
  *
  * @param {string} username - The username of the user to retrieve.
  * @returns {Promise<UserInfo | null>} A Promise that resolves with the user information if found,
@@ -75,7 +75,7 @@ export const addUserToCollection = async (userInfo: UserInfo): Promise<void> => 
 export const getUserFromCollection = async (username: string): Promise<UserInfo | null> => {
     try {
         const db: mongodb.Db = getMongoClient().db(MONGODB_DB);
-        const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
+        const collection: mongodb.Collection<UserInfo> = db.collection("user_auth");
 
         const user = await collection.findOne({ username: username });
         return user;
@@ -86,7 +86,7 @@ export const getUserFromCollection = async (username: string): Promise<UserInfo 
 }
 
 /**
- * Checks if a user with the specified username exists in the "user_info" collection.
+ * Checks if a user with the specified username exists in the "user_auth" collection.
  *
  * @param {string} username - The username to check for existence in the database.
  * @returns {Promise<boolean>} A Promise that resolves with true if the user exists, or false otherwise.
@@ -94,7 +94,7 @@ export const getUserFromCollection = async (username: string): Promise<UserInfo 
 export const checkUsernameExists = async (username: string): Promise<boolean> => {
     try {
         const db: mongodb.Db = getMongoClient().db(MONGODB_DB);
-        const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
+        const collection: mongodb.Collection<UserInfo> = db.collection("user_auth");
 
         const user = await collection.findOne({ username: username });
         return user !== null;
@@ -105,7 +105,7 @@ export const checkUsernameExists = async (username: string): Promise<boolean> =>
 }
 
 /**
- * Updates the access token and creation date of a user in the "user_info" collection.
+ * Updates the access token and creation date of a user in the "user_auth" collection.
  *
  * @param {string} username - The username of the user to update.
  * @param {string} token - The new access token to set for the user.
@@ -116,7 +116,7 @@ export const checkUsernameExists = async (username: string): Promise<boolean> =>
 export const updateUserAccessToken = async (username: string, token: string, createdAt?: Date): Promise<void> => {
     try {
         const db: mongodb.Db = getMongoClient().db(MONGODB_DB);
-        const collection: mongodb.Collection<UserInfo> = db.collection("user_info");
+        const collection: mongodb.Collection<UserInfo> = db.collection("user_auth");
 
         if (!createdAt) createdAt = new Date();
 

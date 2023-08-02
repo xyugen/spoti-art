@@ -20,7 +20,7 @@ $ npm install
 3. Create a MongoDB database and collection:
 - Ensure you have MongoDB installed and running locally.
 - Create a new database and name it as per your preference.
-- Inside the database, create a collection named "user_info" to store user-related data.
+- Inside the database, create a collection named "user_auth" to store user-related data.
 
 4. Obtain Spotify API Credentials:
 - Go to the [Spotify Developer Dashboard website](https://developer.spotify.com/dashboard/).

@@ -5,7 +5,7 @@ const router = express.Router();
 async function getUserFromCollection(username) {
     try {
         const db = getMongoClient().db(MONGODB_DB);
-        const collection = db.collection("user_info");
+        const collection = db.collection("user_auth");
         const user = await collection.findOne({ username: username });
         return user;
     }

@@ -4,7 +4,7 @@ export async function addUserToCollection(username, token, refresh_token) {
     try {
         await client.connect();
         const db = client.db(MONGODB_DB);
-        const collection = db.collection("user_info");
+        const collection = db.collection("user_auth");
         const userDocument = {
             username,
             token,

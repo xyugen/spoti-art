@@ -3,7 +3,7 @@ import { getMongoClient } from './mongodbConnection.js';
 export const addUserToCollection = async (userInfo) => {
     try {
         const db = getMongoClient().db(MONGODB_DB);
-        const collection = db.collection("user_info");
+        const collection = db.collection("user_auth");
         userInfo.created_at = new Date();
         const result = await collection.insertOne(userInfo);
     }
@@ -14,7 +14,7 @@ export const addUserToCollection = async (userInfo) => {
 export const getUserFromCollection = async (username) => {
     try {
         const db = getMongoClient().db(MONGODB_DB);
-        const collection = db.collection("user_info");
+        const collection = db.collection("user_auth");
         const user = await collection.findOne({ username: username });
         return user;
     }
@@ -26,7 +26,7 @@ export const getUserFromCollection = async (username) => {
 export const checkUsernameExists = async (username) => {
     try {
         const db = getMongoClient().db(MONGODB_DB);
-        const collection = db.collection("user_info");
+        const collection = db.collection("user_auth");
         const user = await collection.findOne({ username: username });
         return user !== null;
     }
@@ -38,7 +38,7 @@ export const checkUsernameExists = async (username) => {
 export const updateUserAccessToken = async (username, token, createdAt) => {
     try {
         const db = getMongoClient().db(MONGODB_DB);
-        const collection = db.collection("user_info");
+        const collection = db.collection("user_auth");
         if (!createdAt)
             createdAt = new Date();
         await collection.updateOne({ username: username }, { $set: { access_token: token, created_at: createdAt } });
