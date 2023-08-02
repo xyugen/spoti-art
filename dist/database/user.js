@@ -1,6 +1,6 @@
 import { MONGODB_DB } from '../utils/constants.js';
 import { getMongoClient } from './mongodbConnection.js';
-export async function addUserToCollection(userInfo) {
+export const addUserToCollection = async (userInfo) => {
     try {
         const db = getMongoClient().db(MONGODB_DB);
         const collection = db.collection("user_info");
@@ -10,8 +10,8 @@ export async function addUserToCollection(userInfo) {
     catch (error) {
         console.log("Error uploading user to MongoDB: ", error);
     }
-}
-export async function getUserFromCollection(username) {
+};
+export const getUserFromCollection = async (username) => {
     try {
         const db = getMongoClient().db(MONGODB_DB);
         const collection = db.collection("user_info");
@@ -22,8 +22,8 @@ export async function getUserFromCollection(username) {
         console.log("Error getting user from MongoDB: ", error);
         throw error;
     }
-}
-export async function checkUsernameExists(username) {
+};
+export const checkUsernameExists = async (username) => {
     try {
         const db = getMongoClient().db(MONGODB_DB);
         const collection = db.collection("user_info");
@@ -34,7 +34,7 @@ export async function checkUsernameExists(username) {
         console.log("Error checking if username exists in MongoDB: ", error);
         return false;
     }
-}
+};
 export const updateUserAccessToken = async (username, token, createdAt) => {
     try {
         const db = getMongoClient().db(MONGODB_DB);
