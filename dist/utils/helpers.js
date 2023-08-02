@@ -1,3 +1,4 @@
+import { BASE_URL } from "./constants.js";
 export const generateRandomString = (length) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -12,7 +13,7 @@ export const isAccessTokenExpired = (createdAt, expiresInSeconds) => {
     return currentTimestamp >= expiryTimestamp;
 };
 export const parseEndpoint = (urlString) => {
-    const parsedUrl = new URL(urlString);
+    const parsedUrl = new URL(urlString, BASE_URL);
     const endpoint = parsedUrl.pathname;
     return endpoint;
 };

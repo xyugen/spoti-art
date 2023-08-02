@@ -9,7 +9,7 @@ export const SPOTIFY_ACCOUNTS_API_BASE_URL = 'https://accounts.spotify.com';
 export const SPOTIFY_API_SCOPES = 'user-read-private user-read-email user-read-currently-playing';
 
 // Redirect URI for Spotify OAuth flow
-const PORT = `:${process.env.PORT}` || null; // Optional port constant
+const PORT = `:${process.env.PORT}` || 3000; // Optional port constant
 export const REDIRECT_URI = `${process.env.URL}${PORT}/callback`;
 
 // Client
@@ -23,3 +23,4 @@ export const MONGODB_DB = process.env.MONGODB_DBNAME;
 
 // Developer
 export const DEBUG = process.env.DEBUG;
+export const BASE_URL = process.env.URL;

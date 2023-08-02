@@ -31,7 +31,6 @@ export const tokenRefreshMiddleware = async (req: Request, res: Response, next: 
     try {
         const currentEndpoint = parseEndpoint(req.originalUrl);
         if(!endpointsRequiringTokenRefresh.includes(currentEndpoint)) {
-            console.log(req.originalUrl);
             return next();
         }
 

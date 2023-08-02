@@ -1,3 +1,5 @@
+import { BASE_URL } from "./constants.js";
+
 /**
  * Generates a random string containing numbers and letters
  * @param {number} length The length of the string
@@ -29,8 +31,14 @@ export const isAccessTokenExpired = (createdAt: Date, expiresInSeconds: number):
     return currentTimestamp >= expiryTimestamp;
 }
 
-export const parseEndpoint = (urlString: string) => {
-    const parsedUrl = new URL(urlString);
+/**
+ * Parse the endpoint from the given URL string.
+ *
+ * @param {string} urlString - The URL string to parse.
+ * @returns {string} The parsed endpoint.
+ */
+export const parseEndpoint = (urlString: string): string => {
+    const parsedUrl = new URL(urlString, BASE_URL);
     const endpoint = parsedUrl.pathname;
     return endpoint;
 }
