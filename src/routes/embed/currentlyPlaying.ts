@@ -7,8 +7,7 @@ const router = express.Router();
 
 router.get('/embed/currently-playing', fetchCurrentMusicData, (req: Request, res: Response) => {
     const musicData = req.musicData;
-    if (musicData) return res.send(renderCurrentlyPlaying(musicData))
-    else return res.send(renderNothingPlaying());
+    return res.send(renderCurrentlyPlaying(musicData, { imgBgColor: "#3F2E3E"}))
 });
 
 export default router;
