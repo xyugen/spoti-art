@@ -44,7 +44,7 @@ router.get('/callback', async (req, res) => {
         }
         catch (error) {
             console.error('Error exchanging code for access token:', error);
-            return res.status(500).json({ error: 'An error occurred while exchanging code for access token', errors: error });
+            return res.status(500).json({ error: 'An error occurred while exchanging code for access token' });
         }
     }
 });

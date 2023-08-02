@@ -35,7 +35,7 @@ router.post('/get-token', async (req: Request, res: Response) => {
         return res.status(200).json(tokenData);
     } catch (error) {
         console.error("Error fetching token: ", error);
-        return res.status(500).json({ error: `An error occured while fetching current token: ${error} ` })
+        return res.status(500).json({ error: `An error occured while fetching current token: ${error}` })
     }
 });
 

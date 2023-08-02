@@ -10,3 +10,4 @@ export const CLIENT_SECRET = process.env.CLIENT_SECRET;
 export const MONGODB_UNAME = process.env.MONGODB_USERNAME;
 export const MONGODB_PASS = process.env.MONGODB_PASSWORD;
 export const MONGODB_DB = process.env.MONGODB_DBNAME;
+export const DEBUG = process.env.DEBUG;
