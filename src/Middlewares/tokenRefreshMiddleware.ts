@@ -9,7 +9,7 @@ export const tokenRefreshMiddleware = async (req: Request, res: Response, next: 
     try {
         const key = req.query.key as string;
         if (!key) {
-            return res.status(400).json({ error: 'API token is missing.' });
+            return res.status(400).json({ error: 'API key is missing.' });
         }
 
         // Get the user from the database based on the key (username, ID, or any unique identifier)

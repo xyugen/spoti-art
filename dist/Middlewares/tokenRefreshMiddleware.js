@@ -7,7 +7,7 @@ export const tokenRefreshMiddleware = async (req, res, next) => {
     try {
         const key = req.query.key;
         if (!key) {
-            return res.status(400).json({ error: 'API token is missing.' });
+            return res.status(400).json({ error: 'API key is missing.' });
         }
         const user = await getUserFromCollection(key);
         if (!user) {
