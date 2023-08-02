@@ -1,5 +1,5 @@
 import Card from "./card.js";
-export const renderCurrentlyPlaying = (musicStats, options) => {
+export const renderCurrentlyPlaying = (musicStats, key, options) => {
     let isPlaying = musicStats.is_playing ? "Playing" : "Paused";
     const imageUrl = musicStats.item?.album.images[1].url;
     const musicTitle = musicStats.item?.name;

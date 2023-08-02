@@ -1,13 +1,17 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { renderCurrentlyPlaying } from '../../client/renderCurrentlyPlaying.js';
 import { fetchCurrentMusicData } from '../../middlewares/fetchCurrentMusicData.js';
-import { renderNothingPlaying } from '../../client/renderNothingPlaying.js';
 
 const router = express.Router();
 
 router.get('/embed/currently-playing', fetchCurrentMusicData, (req: Request, res: Response) => {
     const musicData = req.musicData;
-    return res.send(renderCurrentlyPlaying(musicData, { imgBgColor: "#3F2E3E"}))
+    const key = req.query.key as string;
+    const renderedCard = renderCurrentlyPlaying(musicData, key, { imgBgColor: "#3F2E3E" });
+    
+    res.locals.renderedCard = renderedCard;
+    
+    res.redirect('/embed/currently-playing.png');
 });
 
 export default router;

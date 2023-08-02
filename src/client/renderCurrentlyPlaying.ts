@@ -46,7 +46,7 @@ interface Options {
     imgBgColor?: string,
 }
 
-export const renderCurrentlyPlaying = (musicStats: MusicStat, options?: Options) => {
+export const renderCurrentlyPlaying = (musicStats: MusicStat, key: string, options?: Options) => {
     let isPlaying = musicStats.is_playing ? "Playing" : "Paused";
 
     const imageUrl = musicStats.item?.album.images[1].url;
@@ -108,7 +108,7 @@ export const renderCurrentlyPlaying = (musicStats: MusicStat, options?: Options)
         }
     `);
     
-    return (card.renderCard());
+    return(card.renderCard());
 }
 
 const computeTitleSize = () => {
