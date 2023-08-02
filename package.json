@@ -17,7 +17,7 @@
     "spotify"
   ],
   "author": "xYugen",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "dependencies": {
     "axios": "^1.4.0",
     "canvas": "^2.11.2",
