@@ -30,6 +30,6 @@ export const fetchCurrentMusicData = async (req: Request, res: Response, next: N
         next();
     } catch (error) {
         console.error('Error fetching current music: ', error);
-        return res.status(500).json({ error: 'An error occured while fetching current music.', errors: error})
+        return res.status(500).json({ error: 'An error occured while fetching current music.'})
     }
 };

@@ -4,6 +4,6 @@ import { fetchCurrentMusicData } from '../../middlewares/fetchCurrentMusicData.j
 const router = express.Router();
 router.get('/embed/currently-playing', fetchCurrentMusicData, (req, res) => {
     const musicData = req.musicData;
-    return res.send(renderCurrentlyPlaying(musicData));
+    return res.send(renderCurrentlyPlaying(musicData, { imgBgColor: "#3F2E3E" }));
 });
 export default router;

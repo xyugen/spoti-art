@@ -30,7 +30,7 @@ router.post('/get-token', async (req, res) => {
     }
     catch (error) {
         console.error("Error fetching token: ", error);
-        return res.status(500).json({ error: `An error occured while fetching current token: ${error} ` });
+        return res.status(500).json({ error: `An error occured while fetching current token: ${error}` });
     }
 });
 export default router;
