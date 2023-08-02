@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { SPOTIFY_ACCOUNTS_API_BASE_URL, CLIENT_ID, CLIENT_SECRET } from '../utils/constants.js';
 import { getUserFromCollection, updateUserAccessToken } from '../database/user.js';
-import { isAccessTokenExpired } from '../utils/helpers.js';
+import { parseEndpoint, isAccessTokenExpired } from '../utils/helpers.js';
 import { stringify } from 'querystring';
 async function refreshAccessToken(user) {
     const data = stringify({
@@ -21,8 +21,9 @@ async function refreshAccessToken(user) {
 const endpointsRequiringTokenRefresh = ['/token', '/currently-playing', '/current-user', '/embed/currently-playing'];
 export const tokenRefreshMiddleware = async (req, res, next) => {
     try {
-        const currentEndpoint = req.originalUrl;
+        const currentEndpoint = parseEndpoint(req.originalUrl);
         if (!endpointsRequiringTokenRefresh.includes(currentEndpoint)) {
+            console.log(req.originalUrl);
             return next();
         }
         const key = req.query.key;

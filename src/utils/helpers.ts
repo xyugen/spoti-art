@@ -3,7 +3,7 @@
  * @param {number} length The length of the string
  * @returns {string} The generated string
  */
-export function generateRandomString(length: number): string {
+export const generateRandomString =(length: number): string => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
@@ -18,7 +18,7 @@ export function generateRandomString(length: number): string {
  * @param expiresInSeconds The amount of seconds before an access token expires
  * @returns 'true' if the access token is past it's expiration time
  */
-export function isAccessTokenExpired(createdAt: Date, expiresInSeconds: number): boolean {
+export const isAccessTokenExpired = (createdAt: Date, expiresInSeconds: number): boolean => {
     // Calculate the expiry timestamp by adding the `expiresIn` seconds to the `createdAt` timestamp
     const expiryTimestamp = new Date(createdAt.getTime() + expiresInSeconds * 1000);
 
@@ -27,4 +27,10 @@ export function isAccessTokenExpired(createdAt: Date, expiresInSeconds: number):
 
     // Compare the current timestamp with the expiry timestamp
     return currentTimestamp >= expiryTimestamp;
+}
+
+export const parseEndpoint = (urlString: string) => {
+    const parsedUrl = new URL(urlString);
+    const endpoint = parsedUrl.pathname;
+    return endpoint;
 }
