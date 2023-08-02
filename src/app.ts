@@ -16,6 +16,7 @@ import currentlyPlaying from './routes/embed/currentlyPlaying.js';
 
 // Middlewares
 import { tokenRefreshMiddleware } from './middlewares/tokenRefreshMiddleware.js';
+import { pageNotFoundMiddleware } from './middlewares/pageNotFoundMiddleware.js';
 
 dotenv.config();
 const app = express();
@@ -33,7 +34,6 @@ app.use(callbackRoute);
 
 // Middleware
 app.use(express.json());
-//app.use(isLoggedInMiddleware);
 app.use(tokenRefreshMiddleware);
 
 // Routes
@@ -43,5 +43,8 @@ app.use(getCurrentUser);
 
 // Clients
 app.use(currentlyPlaying);
+
+// Page 404
+app.use(pageNotFoundMiddleware);
 
 export default app;

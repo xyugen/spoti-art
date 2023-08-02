@@ -24,8 +24,16 @@ async function refreshAccessToken(user: UserInfo) {
     return access_token;
 }
 
+// List of endpoints that require tokenRefreshMiddleware
+const endpointsRequiringTokenRefresh = ['/token', '/currently-playing', '/current-user', '/embed/currently-playing'];
+
 export const tokenRefreshMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        const currentEndpoint = req.originalUrl;
+        if(!endpointsRequiringTokenRefresh.includes(currentEndpoint)) {
+            return next();
+        }
+
         const key = req.query.key as string;
         if (!key) {
             return res.status(400).json({ error: 'API key is missing.' });
