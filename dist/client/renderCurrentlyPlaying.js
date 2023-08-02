@@ -8,7 +8,7 @@ export const renderCurrentlyPlaying = (musicStats, options) => {
         isPlaying = "Not playing";
     const card = new Card({});
     card.setHTML(`
-        <div class="card">
+        <div class="card" id="card">
             <div class="card__cover">
                 <img src="${imageUrl || ""}" id="cover__image" />
                 <p id="cover__status">${isPlaying.toUpperCase()}</p>

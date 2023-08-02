@@ -1,3 +1,5 @@
+import html2canvas from "html2canvas";
+
 interface Colors {
     bgColor?: string,
     fgColor?: string,
@@ -102,14 +104,32 @@ class Card {
                         font-family: ${this.fontFamily};
                     }
                     ${this.css}
+                    @media print {
+                        /* Define print styles here */
+                        body *:not(#my-content) {
+                            display: none;
+                        }
+                    }
                 </style>
             </head>
             <body>
                 ${this.html}
+                <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", ${convertToImage});
+                </script>
             </body>
         </html>
         `
     }
+}
+
+const convertToImage = () => {
+    const cardHtml = document.getElementById('card') as HTMLDivElement;
+    html2canvas(cardHtml, { allowTaint: true }).then(canvas => {
+        document.body.appendChild(canvas);
+        cardHtml.style.display = 'none';
+    })
 }
 
 export { Card };
