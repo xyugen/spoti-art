@@ -11,8 +11,9 @@ import authRoute from './routes/authRoute.js';
 import callbackRoute from './routes/callbackRoute.js';
 import getCurrentUser from './routes/getCurrentUser.js';
 
-// Clients
+// Clients/Embed
 import currentlyPlaying from './routes/embed/currentlyPlaying.js';
+import currentlyPlayingPNG from './routes/embed/currentlyPlayingPNG.js'
 
 // Middlewares
 import { tokenRefreshMiddleware } from './middlewares/tokenRefreshMiddleware.js';
@@ -41,8 +42,10 @@ app.use(getTokenRoute);
 app.use(getCurrentlyPlayingRoute);
 app.use(getCurrentUser);
 
-// Clients
+
+// Clients/Embed
 app.use(currentlyPlaying);
+app.use(currentlyPlayingPNG);
 
 // Page 404
 app.use(pageNotFoundMiddleware);

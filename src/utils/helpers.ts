@@ -42,3 +42,19 @@ export const parseEndpoint = (urlString: string): string => {
     const endpoint = parsedUrl.pathname;
     return endpoint;
 }
+
+export class UserKey {
+    private static key: string = "";
+
+    constructor() {
+        UserKey.key = "";
+    }
+
+    public static getKey() {
+        return UserKey.key;
+    }
+
+    public static setKey(key: string) {
+        UserKey.key = key;
+    }
+}

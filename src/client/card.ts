@@ -1,5 +1,6 @@
 import axios from "axios";
 import html2canvas from "html2canvas";
+import { UserKey } from "../utils/helpers.js";
 
 interface Colors {
     bgColor?: string,
@@ -15,7 +16,6 @@ class Card {
     colors: Colors;
     html: string;
     css: string;
-    key: string;
 
     constructor({
         width = 550,
@@ -25,18 +25,20 @@ class Card {
         colors = {
             bgColor: "#331D2C",
             fgColor: "#D9D9D9"
-        },
-        key = "",
+        }
     }) {
         this.width = width;
         this.height = height;
         this.fontFamily = fontFamily;
         this.borderRadius = borderRadius;
         this.colors = colors;
-        this.key = key;
 
         this.html = "";
         this.css = "";
+    }
+
+    public static setKey(key: string) {
+        UserKey.setKey(key);
     }
 
     setHTML(value: string) {
@@ -88,7 +90,6 @@ class Card {
         </style>
     `*/
 
-
     renderCard() {
         const htmlElement = `
             <html lang="en">
@@ -129,8 +130,13 @@ class Card {
         return(htmlElement);
     }
 }
+/**
+ * <script>
+        document.addEventListener("DOMContentLoaded", ${convertToImage});
+    </script>
+ */
 
-const convertToImage = () => {
+const convertToImage = (htmlTemplate: string) => {
     const cardHtml = document.getElementById('card') as HTMLDivElement;
     html2canvas(cardHtml, { allowTaint: true, useCORS: true }).then(canvas => {
         const imageUrl = canvas.toDataURL('image/png')
@@ -139,30 +145,28 @@ const convertToImage = () => {
         img.src = imageUrl;
         document.body.appendChild(img);
         cardHtml.style.display = 'none';
+    });
+};
 
-        // TODO: Save image to /save-image
-    })
-}
-// TODO: get user key and upload image link
 const uploadImageLink = async (imageId: string, imageUrl: string) => {
     try {
         await axios.post('/post/save-image', {
             headers: {
-                'Content-Type': 'applicacation/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ imageId, imageUrl })
-        })
-        .then((response) => {
+        }).then((response) => {
             console.log(response);
-        })
-        .catch((error) => {
+        }).catch((error) => {
             console.log(error);
         });
     } catch (error) {
         console.log('Image upload has failed.')
     }
-}
 
+    // TODO: Save image to /save-image
+    uploadImageLink(UserKey.getKey(), imageUrl)
+}
 
 export { Card };
 export default Card;

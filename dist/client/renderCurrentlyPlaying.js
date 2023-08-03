@@ -7,6 +7,7 @@ export const renderCurrentlyPlaying = (musicStats, key, options) => {
     if (!musicStats.item?.name)
         isPlaying = "Not playing";
     const card = new Card({});
+    Card.setKey(key);
     card.setHTML(`
         <div class="card" id="card">
             <div class="card__cover">

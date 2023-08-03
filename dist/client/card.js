@@ -1,5 +1,6 @@
 import axios from "axios";
 import html2canvas from "html2canvas";
+import { UserKey } from "../utils/helpers.js";
 class Card {
     width;
     height;
@@ -8,19 +9,20 @@ class Card {
     colors;
     html;
     css;
-    key;
     constructor({ width = 550, height = 300, fontFamily = "'Montserrat', 'Poppins', sans-serif", borderRadius = 5, colors = {
         bgColor: "#331D2C",
         fgColor: "#D9D9D9"
-    }, key = "", }) {
+    } }) {
         this.width = width;
         this.height = height;
         this.fontFamily = fontFamily;
         this.borderRadius = borderRadius;
         this.colors = colors;
-        this.key = key;
         this.html = "";
         this.css = "";
+    }
+    static setKey(key) {
+        UserKey.setKey(key);
     }
     setHTML(value) {
         this.html = value;
@@ -68,7 +70,7 @@ class Card {
         return (htmlElement);
     }
 }
-const convertToImage = () => {
+const convertToImage = (htmlTemplate) => {
     const cardHtml = document.getElementById('card');
     html2canvas(cardHtml, { allowTaint: true, useCORS: true }).then(canvas => {
         const imageUrl = canvas.toDataURL('image/png');
@@ -83,20 +85,19 @@ const uploadImageLink = async (imageId, imageUrl) => {
     try {
         await axios.post('/post/save-image', {
             headers: {
-                'Content-Type': 'applicacation/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ imageId, imageUrl })
-        })
-            .then((response) => {
+        }).then((response) => {
             console.log(response);
-        })
-            .catch((error) => {
+        }).catch((error) => {
             console.log(error);
         });
     }
     catch (error) {
         console.log('Image upload has failed.');
     }
+    uploadImageLink(UserKey.getKey(), imageUrl);
 };
 export { Card };
 export default Card;

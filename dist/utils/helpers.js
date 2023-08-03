@@ -17,3 +17,15 @@ export const parseEndpoint = (urlString) => {
     const endpoint = parsedUrl.pathname;
     return endpoint;
 };
+export class UserKey {
+    static key = "";
+    constructor() {
+        UserKey.key = "";
+    }
+    static getKey() {
+        return UserKey.key;
+    }
+    static setKey(key) {
+        UserKey.key = key;
+    }
+}
